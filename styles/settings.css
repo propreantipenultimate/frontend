@@ -1,0 +1,73 @@
+#navbar h2 {
+    font-weight: 400;
+    border-bottom: solid 1px var(--text-colour);
+    padding-block-end: 1rem;
+    margin: 0 auto;
+    width: 15ch;
+    margin-top: 1rem;
+}
+
+#content h1 {
+    font-weight: 400;
+}
+
+.settings-display {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    padding-block: 1rem;
+    padding-inline: 1rem;
+    gap: 1rem;
+}
+
+.settings-display label {
+    font-size: 1em;
+    font-family: var(--condensed-font-stack);
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-transform: uppercase;
+    border-bottom: solid 1px transparent;
+    padding-block: 1px;
+    text-align: right;
+}
+
+.settings-display input, .settings-display select {
+    margin-bottom: unset;
+}
+
+.settings-display div {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: stretch;
+}
+
+.settings-display div input[type=radio] {
+    display: none;
+}
+
+.settings-display label:has(+ div) {
+    align-items: flex-start;
+    padding-top: 0.25rem;
+}
+
+.settings-display div input[type=radio]:checked + label {
+    --body-colour: color-mix(in srgb, green 10%, transparent 90%);
+}
+
+.settings-display div input[type=radio] + label {
+    min-width: fit-content;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.settings-display input:disabled {
+    border-bottom-color: color-mix(in srgb, var(--text-colour) 20%, transparent 80%);
+}
+
+@media (max-width: 600px) {
+    #content h1 + button {
+        width: calc(100% - 2em);
+        margin-inline-start: 1em;
+    }
+}

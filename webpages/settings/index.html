@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - nNetwork</title>
+    <link rel="stylesheet" href="../../styles/common.css">
+    <link rel="stylesheet" href="../../styles/settings.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="../../common-scripts/database.js" type="module"></script>
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+    <script type="module" src="../../common-scripts/side-notices.js"></script>
+</head>
+<body>
+    <div id="content">
+        <div class="settings-display" style="grid-template-columns: 1fr 1fr;">
+            <button id="logout">Log Out</button>
+            <button>Reset All Settings</button>
+        </div>
+        <form id="settings-form">
+            <div class="settings-display" id="notifications-toggles">
+                <label>Notification Activity</label>
+                <div>
+                    <input type="radio" name="notify-about" id="notify-about-all" disabled>
+                    <label for="notify-about-all">All</label>
+
+                    <input type="radio" name="notify-about" id="notify-about-following" disabled>
+                    <label for="notify-about-following">Following and Notices</label>
+                    
+                    <input type="radio" name="notify-about" id="notify-about-notices" disabled>
+                    <label for="notify-about-notices">Notices Only</label>
+
+                    <input type="radio" name="notify-about" id="notify-about-comments" disabled>
+                    <label for="notify-about-comments">Comments Only</label>
+                </div>
+            </div>
+            <h1>Invites</h1>
+            <div class="settings-display">
+                <label for="invite-code">Your Invite Code</label>
+                <input type="text" name="" id="invite-code" disabled value="12Aa/+">
+
+                <label for="invitesleft">Invites Left</label>
+                <input type="number" name="" id="invitesleft" disabled value="0">
+            </div>
+
+            <h1 id="account">Account and Profile</h1>
+            <div class="settings-display">
+                <label for="uname-text">Username</label>
+                <input name="" id="uname-text" type="text">
+
+                <label for="email">E-Mail Address</label>
+                <button id="reset-pass">Change Address</button>
+
+                <label for="reset-pass">Password</label>
+                <button id="reset-pass">Reset Password</button>
+
+                <label for="joindate">Join Date</label>
+                <input type="text" name="" id="joindate" disabled>
+
+                <label for="branch">Branch</label>
+                <select name="" id="branch">
+                    <option value="BLR-KSN">BLR-KSN</option>
+                </select>
+
+                <label for="avatar-url">Profile Colour Tint</label>
+                <input type="text" name="" id="avatar-url">
+            </div>
+
+            <h1>Appearance</h1>
+            <div class="settings-display">
+                <label for="allow-user-profile-colours">Allow User Profile Colours</label>
+                <div>
+                    <input type="radio" name="aupc" id="aupc-yes" checked value="true">
+                    <label for="aupc-yes">Yes</label>
+                    <input type="radio" name="aupc" id="aupc-no" value="false">
+                    <label for="aupc-no">No</label>
+                </div>
+
+                <label for="uiscale">UI Scale</label>
+                <input type="number" name="" id="uiscale" value="1.0">
+            </div>
+
+            <h1>Notifications</h1>
+            <p>Notification support is currently under development.</p>
+            <div class="settings-display">
+                <label>Enable Notifications</label>
+                <div>
+                    <input type="radio" name="enable-notifications" id="enable-notifications-yes" disabled>
+                    <label for="enable-notifications-yes">Yes</label>
+
+                    <input type="radio" name="enable-notifications" id="enable-notifications-no" disabled>
+                    <label for="enable-notifications-no">No</label>
+                </div>
+            </div>
+
+            <h1>Advanced</h1>
+            <div class="settings-display">
+                <label for="account-id">Internal Account ID</label>
+                <input type="text" name="" id="account-id" disabled>
+
+                <label>logged in as admin</label>
+                <div>
+                    <input type="radio" name="is-admin" id="is-admin-yes" disabled checked>
+                    <label for="is-admin-yes">Yes</label>
+                    <input type="radio" name="is-admin" id="is-admin-no" disabled>
+                    <label for="is-admin-no">No</label>
+                </div>
+
+                <label>Mathjax capable client</label>
+                <div>
+                    <input type="radio" name="is-admin" id="is-admin-yes" disabled>
+                    <label for="is-admin-yes">Yes</label>
+                    <input type="radio" name="is-admin" id="is-admin-no" disabled>
+                    <label for="is-admin-no">No</label>
+                </div>
+
+                <label for="user-agent">User Agent String</label>
+                <textarea name="user-agent" id="user-agent" disabled></textarea>
+            </div>
+        </form>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

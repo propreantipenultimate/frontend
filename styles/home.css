@@ -1,0 +1,81 @@
+.post-card {
+    background-color: color-mix(in srgb, var(--text-colour) 5%, var(--body-colour) 95%);
+    color: color-mix(in srgb, var(--text-colour) 95%, var(--body-colour) 5%);
+    padding: 1rem;
+    max-width: 500px;
+    margin-inline: auto;
+    margin-block: 1rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    animation-name: post-card-appear;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-out;
+    animation-direction: normal;
+    animation-fill-mode: backwards;
+}
+
+.post-card.active {
+    z-index: 99999999;
+    background-color: var(--body-colour);
+}
+
+.post-card.active ~ .post-card {
+    opacity: 0;
+}
+
+.post-card.active * {
+    opacity: 0;
+}
+
+.post-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.post-header
+
+.post-header * {
+    color: inherit;
+    word-wrap: break-word;
+    line-break: anywhere;
+}
+
+.post-header a.button {
+    flex-grow: 0;
+}
+
+.post-header h2 {
+    font-weight: 500;
+    margin-block: 0;
+}
+
+.post-header h3 {
+    margin-block: 0;
+    font-weight: 400;
+    user-select: none;
+}
+
+.post-header h2, .post-header h3 {
+    font-family: var(--condensed-font-stack);
+}
+
+.post-header a {
+    text-decoration: none;
+}
+
+.post-card:not(:last-of-type) {
+    border-block-end-width: 0.5px;
+}
+
+.post-card:not(:first-of-type) {
+    border-block-start-width: 0.5px;
+}
+
+@media (hover: hover) {
+    .post-card:not(.active):hover {
+        transform: scale(1.05);
+    }
+}

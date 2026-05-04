@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In - nNetwork</title>
+    <link rel="stylesheet" href="../../styles/common.css">
+    <link rel="stylesheet" href="../../styles/signup.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="../../common-scripts/database.js" type="module"></script>
+</head>
+<body class="visible-content">
+    <aside>
+        <h1 class="logo large">nNetwork</h1>
+    </aside>
+    <div id="content">
+        <h1>Log In</h1>
+        <p>Don't have an account? <a class="button" href="../signup/index.html">Sign Up</a></p>
+
+        <h2>Personal Details</h2>
+        <h3>E-Mail Address</h3>
+        <input type="email" id="email-input" placeholder="abc@xyz.com">
+        
+        <h3>Password</h3>
+        <input type="password" placeholder="6-16 characters" id="password">
+        <p>Don't remember your password? <button>Click Here</button></p>
+
+        <div style="font-size: 1.25em;">
+            <button onclick="handleLogIn()">Log In</button>
+            <button>Reset Data</button>
+        </div>
+    </div>
+    <aside>
+        <p style="font-family: var(--font-stack);">Welcome to the nNetwork!<br><br>
+        Just a few more steps before we can bring you in.
+        </p>
+    </aside>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="../../common-scripts/database.js" type="module"></script>
+    <script src="../../common-scripts/alert.js" type="module"></script>
+    <script src="script.js" type="module"></script>
+</body>
+</html>

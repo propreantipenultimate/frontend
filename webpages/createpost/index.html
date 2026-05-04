@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Post - nNetwork</title>
+    <link rel="stylesheet" href="../../styles/common.css">
+    <link rel="stylesheet" href="../../styles/createpost.css">
+    <script src="script.js" type="module" defer></script>
+    <script src="../../common-scripts/mathjax.js" type="module"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+    <script src="../../common-scripts/side-notices.js" type="module"></script>
+</head>
+<body>
+    <div id="content">
+        <h4>Post Title</h4>
+        <h1 contenteditable="true" id="post-title">Click to Edit Post Title</h1> 
+        <div id="layout-post-text">
+            <div>
+                <h2>Post Source</h2>
+                <textarea name="source-text" id="source-text" placeholder="Post Source Text" maxlength="280">if \( ax^2+bx+c=0 \) $$ {x = -b \pm \sqrt{b^2 - 4ac}}\over{2a} $$</textarea>
+                <p><span id="char-count">65</span> / 280 Characters</p>
+            </div>
+            <div>
+                <h2>Post Preview</h2>
+                <p id="post-preview">if \( ax^2+bx+c=0 \) $$ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$</p>
+            </div>
+        </div>
+        <p>nNetwork supports Math input as MathJax. <a href="https://www.mathjax.org" class="button">Learn more about mathjax</a></p>
+        <p>Posts are currently limited to 280 characters.</p>
+        <button id="submit-post">Create Post</button>
+        <button onclick="window.location.reload();">Reset Source</button>
+    </div>
+</body>
+</html>

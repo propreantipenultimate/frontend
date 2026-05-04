@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - nNetwork</title>
+    <link rel="stylesheet" href="../../styles/common.css">
+    <link rel="stylesheet" href="../../styles/search.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="../../common-scripts/database.js" type="module"></script>
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+    <script type="module" src="../../common-scripts/mathjax.js"></script>
+    <script src="../../common-scripts/side-notices.js" type="module"></script>
+</head>
+<body>
+    <div id="content">
+        <div id="search-input-box">
+            <input type="text" name="" id="search-text" class="textarea">
+            <button onclick="getSearchResults(20)">Search</button>
+        </div>
+        <div id="search-input-pills">
+            <button onclick="window.shownResultType = 'user'; getSearchResults(20); setPrimary(this);" class="primary">Profiles</button>
+            <button onclick="window.shownResultType = 'post'; getSearchResults(20); setPrimary(this);">Posts</button>
+            <button onclick="window.shownResultType = 'comment'; getSearchResults(20); setPrimary(this);">Comments</button>
+        </div>
+        <div id="search-results">
+        </div>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

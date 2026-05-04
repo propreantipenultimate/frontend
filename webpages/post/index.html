@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post - nNetwork</title>
+    <link rel="stylesheet" href="../../styles/common.css">
+    <link rel="stylesheet" href="../../styles/comments.css">
+    <link rel="preload" href="https://unpkg.com/javascript-time-ago@2.5.1/bundle/javascript-time-ago.js" as="script">
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="../../common-scripts/database.js" type="module"></script>
+    <script type="module" src="../../common-scripts/mathjax.js"></script>
+    <script src="../../common-scripts/side-notices.js" type="module"></script>
+</head>
+<body>
+    <div id="content">
+        <div class="modal" id="emoji-picker-modal">
+            <emoji-picker></emoji-picker>
+        </div>
+        <h1 id="post-title"></h1>
+        <h4><span id="author-username"></span>, <span id="timestamp"></span></h4>
+        <p id="post-text"></p>
+        <div id="reactions">
+            <button>Flag</button>
+            <button onclick="document.getElementById('emoji-picker-modal').classList.add('visible');">React</button>
+            <div id="reactions-actual"></div>
+        </div>
+        <div class="reactions">
+            
+        </div>
+        <div id="comment-input">
+            <textarea name="" id="comment-input-text"></textarea>
+            <button type="button" id="comment" onclick="writeComment()" disabled>Comment</button>
+        </div>
+        <div class="comment-thread" id="comments">
+        </div>
+        <p class="hero" id="no-comments">Looks like there's no comments!<br>Get the conversation started...</p>
+        <p class="hero" id="comment-ender">Loading more Comments...</p>
+    </div>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+    <script src="post.js" type="module"></script>
+</body>
+</html>

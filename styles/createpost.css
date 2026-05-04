@@ -1,0 +1,35 @@
+[contenteditable]:focus {
+    outline: 0px solid transparent !important;
+    border: none;
+}
+
+h4 {
+    margin-bottom: 0;
+    font-family: var(--headings-font);
+    font-weight: 300;
+}
+
+h4 ~ h1 {
+    margin-top: 0;
+    font-weight: 500;
+}
+
+#layout-post-text {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    border-bottom: solid color-mix(in srgb, var(--text-colour) 50%, transparent 50%) 1px;
+    margin-bottom: 1em;
+}
+
+#layout-post-text h2 {
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    #layout-post-text {
+        display: flex;
+        flex-direction: column;
+    }
+}

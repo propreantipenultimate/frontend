@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - nNetwork</title>
+    <link rel="stylesheet" href="../../styles/common.css">
+    <link rel="stylesheet" href="../../styles/profile.css">
+    <link rel="preload" href="https://unpkg.com/javascript-time-ago@2.5.1/bundle/javascript-time-ago.js" as="script">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+    <script type="module" src="../../common-scripts/mathjax.js"></script>
+    <script src="../../common-scripts/side-notices.js" type="module"></script>
+</head>
+<body>
+    <div id="content">
+        <h1 id="username-profile">@undefined</h1>
+        <p>Joined <span id="joindate">undefined</span> &bull; <span id="branch">undefined</span> &bull; Grade <span id="grade">undefined</span></p>
+        <div id="not-me-buttons">
+            <button id="follow" class="primary">Follow</button>
+            <button id="flag">Report</button>
+        </div>
+        <a id="edit-profile" class="button primary" href="../settings/#account">Edit Profile</a>
+        <hr>
+        <h2>Stats</h2>
+        <div id="stats">
+            <p><span class="large" id="posts">0</span> Post(s)</p>
+            <p><span class="large" id="followers">0</span> Follower(s)</p>
+            <p><span class="large" id="following">0</span>Following</p>
+        </div>
+        <h2>Recent Posts <button>View more</button></h2>
+        <div class="carousel" id="post-carousel">
+            
+        </div>
+    </div>
+    <script src="script.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - nNetwork</title>
+    <link rel="stylesheet" href="../../styles/common.css">
+    <link rel="stylesheet" href="../../styles/signup.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="../../common-scripts/database.js" type="module"></script>
+</head>
+<body class="visible-content">
+    <aside>
+        <h1 class="logo large">nNetwork</h1>
+    </aside>
+    <div id="content">
+        <h1>Sign Up</h1>
+        <p>Already have an account? <a class="button" href="../login/index.html">Log In</a></p>
+        <h2>Invite Code</h2> 
+        
+        <input type="text" placeholder="Alphanumeric Code(A-Z, a-z, 0-9, +, /)" id="username-invite" maxlength="6">
+        <h2>Personal Details</h2>
+        <h3>E-Mail Address</h3>
+        <input type="email" id="email-input" placeholder="abc@xyz.com">
+
+        <h3>Username</h3>
+        <input type="text" placeholder="Only numbers(1234567890) or text" id="username-input">
+        
+        <h3>Password</h3>
+        <input type="password" placeholder="6-16 characters" id="password">
+
+        <h2>Narayana Information</h2>
+
+        <div class="two-bit">
+            <div>
+                <h3>Branch</h3>
+                <select name="" id="branch">
+                    <option value="" selected>BLR-KSN</option>
+                </select>
+            </div>
+            <div>
+                <h3>Grade</h3>
+                <select name="" id="grade">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11" disabled>11</option>
+                    <option value="12" disabled>12</option>
+                </select>
+            </div>
+        </div>
+        <p>By signing up, you accept the nNetwork Terms of Service.</p>
+        <div style="font-size: 1.25em;">
+            <button onclick="handleSignUp()">Sign Up</button>
+            <button>Reset Data</button>
+        </div>
+    </div>
+    <aside>
+        <p style="font-family: var(--font-stack);">Welcome to the nNetwork!<br><br>
+        Just a few more steps before we can bring you in.
+        </p>
+    </aside>
+    <script src="script.js" type="module"></script>
+</body>
+</html>

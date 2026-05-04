@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - nNetwork</title>
+    <link rel="stylesheet" href="../../styles/common.css">
+    <link rel="stylesheet" href="../../styles/notifications.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="../../common-scripts/database.js" type="module"></script>
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+    <script src="../../common-scripts/side-notices.js" type="module"></script>
+    <script src="../../common-scripts/pulltorefresh.js"></script>
+</head>
+<body>
+    <div id="content">
+        <p class="hero visible"></p>
+        <div id="all-info">
+            <h2>Notices and Exams</h2>
+            <div class="exam-notices"></div>
+            <h2>Notifications</h2>
+            <div id="exam-info"></div>
+            <div id="notif-container">
+                <div class="notifications-container"></div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

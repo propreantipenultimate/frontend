@@ -1,0 +1,240 @@
+.comment-thread {
+    width: 700px;
+    max-width: 100%;
+    margin: auto;
+    padding: 0 30px;
+    background-color: transparent;
+    border: 1px solid transparent; /* Removes margin collapse */
+}
+.m-0 {
+    margin: 0;
+}
+.sr-only {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* Comment */
+
+.comment {
+    position: relative;
+    margin: 20px auto;
+    content-visibility: auto;
+}
+.comment-heading {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    font-size: 14px;
+}
+.comment-voting {
+    width: 20px;
+    border: 1px solid color-mix(in srgb, var(--text-colour) 20%, transparent 80%);
+    border-radius: 4px;
+}
+.comment-voting button {
+    display: block;
+    width: 100%;
+    height: 50%;
+    padding: 0;
+    border: 0;
+    font-size: 10px;
+}
+.comment-info {
+    color: color-mix(in srgb, var(--text-colour) 50%, transparent 50%);
+    margin-left: 10px;
+}
+.comment-author {
+    color: color-mix(in srgb, var(--text-colour) 85%, transparent 15%);
+    font-weight: bold;
+    text-decoration: none;
+}
+.comment-author:hover {
+    text-decoration: underline;
+}
+.replies {
+    margin-left: 20px;
+}
+
+/* Adjustments for the comment border links */
+
+.comment-border-link {
+    display: block;
+    position: absolute;
+    top: 70px;
+    left: 5px;
+    width: 2px;
+    height: calc(100% - 50px);
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    background-color: rgba(0, 0, 0, 0.1);
+    background-clip: padding-box;
+}
+.comment-border-link:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.comment-body {
+    padding: 0 20px;
+    padding-left: 28px;
+}
+.replies {
+    margin-left: 28px;
+}
+
+/* Adjustments for toggleable comments */
+
+details.comment summary {
+    position: relative;
+    list-style: none;
+    cursor: pointer;
+}
+details.comment summary::-webkit-details-marker {
+    display: none;
+}
+details.comment:not([open]) .comment-heading {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.comment-heading::after {
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+    align-self: center;
+    font-size: 12px;
+    color: color-mix(in srgb, var(--text-colour) 55%, transparent 45%);
+}
+details.comment[open] .comment-heading::after {
+    content: "Click to hide";
+}
+details.comment:not([open]) .comment-heading::after {
+    content: "Click to show";
+}
+
+/* Adjustment for Internet Explorer */
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    /* Resets cursor, and removes prompt text on Internet Explorer */
+    .comment-heading {
+        cursor: default;
+    }
+    details.comment[open] .comment-heading::after,
+    details.comment:not([open]) .comment-heading::after {
+        content: " ";
+    }
+}
+
+/* Styling the reply to comment form */
+
+.reply-form textarea {
+    font-family: inherit;
+    font-size: 16px;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+.d-none {
+    display: none;
+}
+
+/* responsive shit */
+
+@media (max-width: 600px) {
+    .comment-thread {
+        padding: 0 0px;
+    }
+}
+
+button.upvote, button.downvote {
+    overflow: visible;
+    display: none;
+}
+
+/* other post view stuff */
+
+#content h1 + h4 {
+    user-select: none;
+}
+
+#author-username {
+    cursor: pointer;
+}
+
+#comment-input {
+    display: flex;
+    margin-top: 0.5rem;
+}
+
+#comment-input button {
+    border-top-left-radius: 0px;
+}
+
+.reactions button span.count {
+    margin-inline-start: 0.5rem;
+    font-family: var(--font-stack);
+}
+
+.reaction {
+    border-radius: 99999999em;
+}
+
+.reaction:has(.emoji) {
+    font-family: inherit;
+}
+
+.reaction .emoji {
+    margin-inline-end: 0.25rem;
+}
+
+.reaction.my-reaction {
+    --body-colour: color-mix(in srgb, green 10%, transparent 90%);
+}
+
+.react-box {
+    display: inline-block !important;
+    border: solid 1px color-mix(in srgb, var(--text-colour) 20%, transparent 80%) !important;
+    border-radius: 0.25rem;
+    height: 1.9rem;
+    width: 5rem !important;
+    max-width: 15rem !important;
+    max-width: 3rem;
+    margin: 0;
+    position: relative;
+    top: calc(0.125rem * 0.25);
+    font-size: 1rem !important;
+    text-align: center;
+}
+
+#reactions-actual {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 0.25rem;
+    row-gap: 0.5rem;
+    margin-block-start: 0.5rem;
+}
+
+@media (prefers-color-scheme: light) {
+    .react-box {
+        background-color: color-mix(in srgb, var(--text-colour-copy) 90%, var(--body-colour-copy) 10%);
+        color: var(--body-colour);
+    }
+}
+
+@media (max-width: 600px) {
+    #comment-input {
+        flex-direction: column;
+    }
+
+    #comment-input button {
+        border-top-right-radius: 0px;
+    }
+}
+
+@media (min-width: 601px) {
+    #comment-input button {
+        border-bottom-left-radius: 0px;
+    }
+}
