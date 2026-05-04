@@ -9,4 +9,4 @@
 - Database & Auth: Supabase (PostgreSQL)
 - Security: Database-level Row Level Security (RLS)
 
-Available ![here](https://narayananetwork.netlify.app)
+Available [here](https://narayananetwork.netlify.app "App Link")
