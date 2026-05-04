@@ -12,7 +12,7 @@ export let NotificationsBuilder = async () => {
     const { data: commentData } = await database.from('comments').select(`
         created_at, users ( username ), 
         posts ( title, id, users!posts_author_fkey ( username ) )
-    `).textSearch('content', `@nNetworkOfficial`).order('created_at', { ascending: false }).limit(10);
+    `).textSearch('content', sessionStorage.getItem('username')).order('created_at', { ascending: false }).limit(10);
 
     if (commentData) {
         commentData.forEach(elem => {
@@ -27,7 +27,7 @@ export let NotificationsBuilder = async () => {
     // 2. Fetch Post Mentions
     const { data: postData } = await database.from('posts').select(`
         created_at, id, title, users!posts_author_fkey ( username )
-    `).textSearch('content', `@nNetworkOfficial`).order('created_at', { ascending: false }).limit(10);
+    `).textSearch('content', sessionStorage.getItem('username')).order('created_at', { ascending: false }).limit(10);
 
     if (postData) {
         postData.forEach(elem => {
