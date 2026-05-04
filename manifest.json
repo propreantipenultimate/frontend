@@ -1,26 +1,35 @@
 {
+    "id": "/nnetwork-pwa",
     "name": "nNetwork: Social Media for Narayana",
-    "short_name": "Network",
+    "short_name": "nNetwork",
+    "description": "High-performance social platform optimized for students.",
     "icons": [
         {
-            "src": "icons/tiny.webp",
-            "sizes": "48x48"
+            "src": "assets/icon-dark@48.png",
+            "sizes": "48x48",
+            "type": "image/png"
         },
         {
-            "src": "icons/small.png",
-            "sizes": "72x72 96x96 128x128 256x256",
+            "src": "assets/icon-dark@96.png",
+            "sizes": "96x96",
+            "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "icons/large.png",
-            "sizes": "512x512"
+            "src": "assets/icon-dark@512.png",
+            "sizes": "512x512",
+            "type": "image/png"
         },
         {
-            "src": "icons/scalable.svg",
-            "sizes": "any"
+            "src": "assets/icon-dark.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
         }
     ],
     "display": "standalone",
+    "orientation": "portrait",
     "background_color": "#eeeeee",
+    "theme_color": "#eeeeee",
     "start_url": "/webpages/home/"
 }

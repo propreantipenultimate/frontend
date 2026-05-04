@@ -160,7 +160,15 @@ if(shownavbars == true) {
         </svg>
     </nav>
     <header id="mobile-head">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="var(--text-colour)" id="back-mobile-nav" onclick="barba.go(document.referrer)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="var(--text-colour)" id="back-mobile-nav" onclick="
+            gsap.to('#content, #logo-mobile-nav, #navbar ul', {
+                opacity: 0,
+                duration: barbaTime / 1000
+            });
+            setTimeout(() => {
+                history.back();
+            }, barbaTime);
+        ">
             <path d="m368-480 315 315q11 11 11 27.5T683-109q-12 12-28.5 12T626-109L297-438q-9-9-13-20t-4-22q0-11 4-22t13-20l330-330q12-12 28-11.5t28 12.5q11 12 11.5 28T683-795L368-480Z"/>
         </svg>
         <h3 class="logo" id="logo-mobile-nav"></h3>
