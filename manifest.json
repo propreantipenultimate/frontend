@@ -1,0 +1,26 @@
+{
+    "name": "nNetwork: Social Media for Narayana",
+    "short_name": "Network",
+    "icons": [
+        {
+            "src": "icons/tiny.webp",
+            "sizes": "48x48"
+        },
+        {
+            "src": "icons/small.png",
+            "sizes": "72x72 96x96 128x128 256x256",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/large.png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "icons/scalable.svg",
+            "sizes": "any"
+        }
+    ],
+    "display": "standalone",
+    "background_color": "#eeeeee",
+    "start_url": "/webpages/home/"
+}
