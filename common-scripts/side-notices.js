@@ -11,6 +11,8 @@ if(!!document.referrer && (document.referrer.includes('webpages'))) {
 
 export { gsap };
 
+window.gsap = gsap;
+
 function removeElem(elem) {elem.remove()};
 
 let shownavbars = true;
