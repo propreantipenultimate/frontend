@@ -267,8 +267,7 @@ export function hideLoadingScreen() {
 export function addLoadingScreen() {
     let loadingScreen = document.createElement('div');
     loadingScreen.setAttribute('id', 'loading-screen');
-    showAlert(window.referrerOrigin);
-    if(window.referrerOrigin != window.location.hostname) {
+    if(window.referrerOrigin != window.location.hostname || window.referrerOrigin == '') {
         loadingScreen.innerHTML = '<h1 class="logo large">nNetwork</h1><p class="hero visible" id="loading-teaser" style="opacity: 0">Looks like it\'s taking a while to load...</p>';
     } else {
         loadingScreen.innerHTML = `
