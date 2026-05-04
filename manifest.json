@@ -2,6 +2,7 @@
     "id": "/nnetwork-pwa",
     "name": "nNetwork: Social Media for Narayana",
     "short_name": "nNetwork",
+    "scope": "/",
     "description": "High-performance social platform optimized for students.",
     "icons": [
         {
