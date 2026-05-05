@@ -6,7 +6,7 @@ import { database } from '../../common-scripts/database.js';
 addLoadingScreen();
 
 let firstShowing = true;
-
+/*
 function redirect() {
     if (window.matchMedia('(min-width: 601px)').matches) {
         window.location.replace('../home/');
@@ -20,6 +20,7 @@ window.addEventListener('resize', () => {
 });
 
 redirect();
+*/
 
 const ptr = PullToRefresh.init({
     mainElement: '#all-info',

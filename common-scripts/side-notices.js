@@ -63,44 +63,36 @@ let testNotices = async () => {
 };
 
 testNotices().then(() => {
-    document.addEventListener('DOMContentLoaded', () => {
-        let username = sessionStorage.getItem('username');
-        // side-notices
-        let noticesDesktop = document.createElement('aside');
-        noticesDesktop.innerHTML = sideNoticesHTML.replace('!exams!', sessionStorage.getItem('examinfo'));
-        noticesDesktop.setAttribute('id', 'side-notices');
-        document.body.appendChild(noticesDesktop);
+    // side-notices
+    let noticesDesktop = document.createElement('aside');
+    noticesDesktop.innerHTML = sideNoticesHTML.replace('!exams!', sessionStorage.getItem('examinfo'));
+    noticesDesktop.setAttribute('id', 'side-notices');
+    document.body.appendChild(noticesDesktop);
 
-        setTimeout(() => {   
-            getCurrentNavItem();
-        }, 0);
+    setTimeout(() => {   
+        getCurrentNavItem();
+    }, 0);
 
-        // Now update the UI safely
-        if (username && document.getElementById('username')) {
-            document.getElementById('username').textContent = username;
-        };
+    const links = document.querySelectorAll('a');
 
-        const links = document.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetUrl = link.href;
+            // 1. Check if the link is internal and doesn't open in a new tab
+            if (
+                link.hostname === window.location.hostname && 
+                link.getAttribute('target') !== '_blank' &&
+                !targetUrl.includes('#') // Ignore anchor links
+            ) {
+                e.preventDefault(); // Stop the browser from leaving immediately
+                
+                document.body.classList.remove('visible-content'); // Trigger CSS transition
 
-        links.forEach(link => {
-            link.addEventListener('click', (e) => {
-                const targetUrl = link.href;
-                // 1. Check if the link is internal and doesn't open in a new tab
-                if (
-                    link.hostname === window.location.hostname && 
-                    link.getAttribute('target') !== '_blank' &&
-                    !targetUrl.includes('#') // Ignore anchor links
-                ) {
-                    e.preventDefault(); // Stop the browser from leaving immediately
-                    
-                    document.body.classList.remove('visible-content'); // Trigger CSS transition
-
-                    // 2. Wait for the transition to finish before navigating
-                    setTimeout(() => {
-                    window.location.href = targetUrl;
-                    }, barbaTime); // This duration must match your CSS transition time
-                }
-            });
+                // 2. Wait for the transition to finish before navigating
+                setTimeout(() => {
+                window.location.href = targetUrl;
+                }, barbaTime); // This duration must match your CSS transition time
+            }
         });
     });
 });
@@ -115,7 +107,7 @@ window.addEventListener('pageshow', (event) => {
 });
 
 let sideNoticesHTML = `
-<h3>Signed in as @<span id="username"></span></h3>
+<h3>Notices and Exams</h3>
 !exams!
 `
 
