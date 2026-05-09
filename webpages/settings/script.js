@@ -1,5 +1,6 @@
 import { showAlert } from '../../common-scripts/alert.js';
 import { database } from '../../common-scripts/database.js';
+import { getDateRenderString } from '../../common-scripts/date.js';
 import { debounce } from '../../common-scripts/debounce.js';
 import { addLoadingScreen, showEverything } from '../../common-scripts/side-notices.js';
 
@@ -64,4 +65,29 @@ document.getElementById('settings-form').addEventListener('submit', (event) => {
     event.preventDefault();
 });
 
-showEverything();
+let fetchAllInfo = async () => {
+    let {data: inviteCodeData, error: inviteCodeError} = await database.from('invitecodes').select(`
+        users ( invites_left, username, id, created_at ),
+        code
+    `).eq('id', localStorage.getItem('nNetwork_uid')).single();
+
+    if(inviteCodeError) {
+        showAlert('womp');
+        console.log(inviteCodeError);
+    } else {
+        document.getElementById('invite-code').value = inviteCodeData.code;
+        document.getElementById('invitesleft').value = inviteCodeData.users.invites_left;
+        document.getElementById('uname-text').value = inviteCodeData.users.username;
+        document.getElementById('account-id').value = inviteCodeData.users.id;
+        document.getElementById('joindate').value = getDateRenderString(new Date(inviteCodeData.users.created_at));
+    }
+
+    if(window.MathJax) {
+        document.getElementById('mathjax-no').removeAttribute('checked');
+        document.getElementById('mathjax-yes').setAttribute('checked', 'true');
+    }
+
+    document.getElementById('user-agent').value = navigator.userAgent;
+};
+
+fetchAllInfo().then(showEverything());
