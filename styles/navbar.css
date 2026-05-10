@@ -170,3 +170,24 @@ aside .logo {
     word-break: keep-all;
     max-width: 75vw;
 }
+
+#info-desktop-notifications {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    body {
+        grid-template-columns: 1fr min(60vw, 700px) !important;
+        grid-template-areas: 'navbar content' !important;
+    }
+
+    #side-notices {
+        display: none;
+    }
+}
+
+@media (min-width: 993px) {
+    #info-desktop-notifications {
+        display: none;
+    }
+}
