@@ -1,6 +1,6 @@
 export function handleMentions(elem) {
-    const mentionRegex = /@(\w+)/g;
-    elem.innerHTML = elem.innerHTML.replace(mentionRegex, '<a href="../profile/?username=$1" class="link" rel="noopener noreferrer">@$1</a>');
+    const mentionRegex = /(^|[\s])@(\w+)/g;
+    elem.innerHTML = elem.innerHTML.replace(mentionRegex, '<a href="../profile/?username=$2" class="link" rel="noopener noreferrer">@$2</a>');
 }
 
 export function handleImageLinks(elem) {
