@@ -171,10 +171,6 @@ aside .logo {
     max-width: 75vw;
 }
 
-#info-desktop-notifications {
-    display: none;
-}
-
 @media (max-width: 992px) {
     body {
         grid-template-columns: 1fr min(60vw, 700px) !important;
