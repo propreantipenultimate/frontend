@@ -152,7 +152,11 @@ span.large {
 @media (hover: hover) {
     .post-card:hover {
         transform: rotate(-10deg) translateY(-20px);
-        margin-block-end: -0.75em;
+        margin-block-end: -3em;
+    }
+
+    .post-card h3 img {
+        transform: rotate(90deg);
     }
 
     .post-card.expanded {
