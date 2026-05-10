@@ -11,6 +11,7 @@ addLoadingScreen();
 const user = localStorage.getItem('nNetwork_uid');
 
 let postCount = 0;
+let postCountFollowing = 0;
 let totalPosts = 0;
 let isFeedLoading = true;
 let prof = {};
@@ -82,7 +83,8 @@ export async function loadTrendingFeed(userBranch, batchSize) {
                     author: post.username,
                     date: new Date(post.created_at),
                     reactions: post.reaction_count,
-                    thisPostCount: shuffledFeed.indexOf(post)
+                    thisPostCount: shuffledFeed.indexOf(post),
+                    parent: document.getElementById('posts')
                     //hotness: post.hot_score // Useful for debugging!
                 });
             }, 0);
@@ -95,8 +97,71 @@ export async function loadTrendingFeed(userBranch, batchSize) {
     isFeedLoading = false;
 }
 
+export async function loadFollowingFeed(user, batchSize) {
+    if (isFeedLoading && postCountFollowing > 0) return;
+    isFeedLoading = true;
+
+    const start = postCountFollowing;
+    const end = start + batchSize - 1;
+
+    // 1. Get the list of IDs this user follows
+    // Assuming 'follower_id' is the current user
+    const { data: followData, error: followError } = await database
+        .from('follows')
+        .select('following_id')
+        .eq('follower_id', user.id);
+
+    if (followError || !followData) {
+        console.error('Follow Fetch Error:', followError);
+        isFeedLoading = false;
+        return;
+    }
+
+    const followingIds = followData.map(f => f.following_id);
+
+    // 2. Fetch posts from ALL followed users in one query (more efficient)
+    const { data: feedData, error: feedError } = await database
+        .from('posts')
+        .select(`
+            id,
+            title,
+            content,
+            created_at,
+            author,
+            users!posts_author_fkey ( username )
+        `)
+        .in('author', followingIds) // Use .in for multiple IDs
+        .order('created_at', { ascending: false })
+        .range(start, end);
+
+    if (feedError) {
+        console.error('Feed Error:', feedError);
+        isFeedLoading = false;
+        return;
+    }
+
+    // 3. Render the results
+    if (feedData && feedData.length > 0) {
+        feedData.forEach((post, index) => {
+            renderPostCard({
+                id: post.id,
+                title: post.title,
+                text: post.content,
+                author: post.users?.username || 'Unknown',
+                date: new Date(post.created_at),
+                parent: document.getElementById('following-posts')
+            });
+        });
+        
+        postCountFollowing += feedData.length;
+    }
+
+    isFeedLoading = false;
+    document.getElementById('loading-feed').style.display = 'none';
+}
+
 let renderPostCard = (config) => {
-    let {text, title, author, date, reactions, id, thisPostCount} = config;
+    let {text, title, author, date, reactions, id, thisPostCount, parent} = config;
 
     let postCard = document.createElement('div');
     postCard.innerHTML = `
@@ -125,14 +190,14 @@ let renderPostCard = (config) => {
     updateMathJax([postCard]);
     postCard.style.animationDelay = (thisPostCount * 0.08).toString() + 's';
     postCard.classList.add('post-card');
-    document.getElementById('posts').insertAdjacentElement('beforeend', postCard);
+    parent.insertAdjacentElement('beforeend', postCard);
 }
 
 if (user) {
     // Fetch the logged-in user's profile to get their branch
     const { data: profile } = await database
         .from('users')
-        .select('branch')
+        .select('branch, id')
         .eq('id', user)
         .single();
 
@@ -142,7 +207,7 @@ if (user) {
         .eq('branch', profile.branch);
         // Now load the feed specifically for that branch
         document.getElementById('posts').innerHTML = `
-        <p class="hero visible">Hello, @${sessionStorage.getItem('username')}, Here are Today\'s Hot Posts</p>`
+        <p class="hero visible" style="margin-block-start: 0;">You've seen all the posts from your following @${sessionStorage.getItem('username')}. <br> Here are today's top posts.</p>`
 
         if(totallingError) {
             console.log(totallingError);
@@ -197,12 +262,14 @@ if (user) {
 
     if (window.matchMedia('(max-width: 600px)').matches) {
         loadTrendingFeed(profile.branch, 20).then(() => {
-            hideLoadingScreen().then(() => {showContent(); showTitle();
+                hideLoadingScreen().then(() => {showContent(); showTitle();
             });
         });
     } else {
-        loadTrendingFeed(profile.branch, 20);
-        hideLoadingScreen().then(() => {showContent(); showTitle();});
+        loadFollowingFeed(profile, 5).then(() => {
+            loadTrendingFeed(profile.branch, 20);
+            hideLoadingScreen().then(() => {showContent(); showTitle();});
+        });
     };
 };
 
@@ -214,7 +281,7 @@ let refresher = (profile) => {
         `;
         loadTrendingFeed(profile.branch, 20).then(() => {
             document.getElementById('posts').innerHTML = `
-                <p class="hero visible">Hello, @${sessionStorage.getItem('username')}, Here are Today\'s Hot Posts</p>
+                <p class="hero visible" style="margin-block-start: 0;">You've seen all the posts from your following @${sessionStorage.getItem('username')}. <br> Here are today's top posts.</p>
             `;
         });
     }, 50);
