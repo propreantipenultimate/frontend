@@ -122,7 +122,7 @@ let navbarHTML = `
         <li onclick="barba.go('../settings/')" id="settings-desktop-nav">Settings</li>
         <li onclick="barba.go('../profile/')" id="home-profile-nav">Profile</li>
         <li onclick="barba.go('../createpost/')" id="info-desktop-nav">New Post</li>
-        <li onclick="barba.go('../notifications/')" id="info-desktop-notifications" style="display: none">Notifications</li>
+        <li onclick="barba.go('../notifications/')" id="info-desktop-notifications">Notifications</li>
     </ul>
 </nav>
 <div id="notifications-container" class="notifications-container"></div>

@@ -66,15 +66,18 @@ document.getElementById('settings-form').addEventListener('submit', (event) => {
 });
 
 let fetchAllInfo = async () => {
-    let {data: inviteCodeData, error: inviteCodeError} = await database.from('invitecodes').select(`
-        users ( invites_left, username, id, created_at ),
+    let {data: inviteCodeDataUnsingled, error: inviteCodeError} = await database.from('invitecodes').select(`
+        users ( invites_left, username, id, created_at, branch ),
         code
-    `).eq('id', localStorage.getItem('nNetwork_uid')).single();
+    `).eq('id', localStorage.getItem('nNetwork_uid'));
 
     if(inviteCodeError) {
         showAlert('womp');
         console.log(inviteCodeError);
     } else {
+        console.log('AAAAAAAAAAAAAAAAAA');
+        console.log(localStorage.getItem('nNetwork_uid'), inviteCodeDataUnsingled);
+        let inviteCodeData = inviteCodeDataUnsingled[0];
         document.getElementById('invite-code').value = inviteCodeData.code;
         document.getElementById('invitesleft').value = inviteCodeData.users.invites_left;
         document.getElementById('uname-text').value = inviteCodeData.users.username;
@@ -88,6 +91,15 @@ let fetchAllInfo = async () => {
     }
 
     document.getElementById('user-agent').value = navigator.userAgent;
+
+
+    [...document.getElementsByClassName('settings-display')].forEach(element => {
+        [...element.childNodes].forEach(child => {
+            child.addEventListener('change', () => {
+                console.log('text');
+            });
+        });
+    });
 };
 
 fetchAllInfo().then(showEverything());

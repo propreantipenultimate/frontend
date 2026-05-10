@@ -4,6 +4,7 @@ import { getTimeElapsedString, getDateRenderString } from '../../common-scripts/
 import { updateMathJax } from '../../common-scripts/mathjax.js';
 import { addLoadingScreen, showEverything } from '../../common-scripts/side-notices.js';
 import { scaleToViewport } from '../../common-scripts/transformer.js';
+import { handleImageLinks, handleMentions } from '../../common-scripts/links.js';
 
 let outputtedPostCards = 0;
 let followers;
@@ -116,6 +117,8 @@ function generatePostCard(config) {
     postElem.style.zIndex = outputtedPostCards + 1;
     outputtedPostCards++;
     document.getElementById('post-carousel').appendChild(postElem);
+    handleMentions(postElem);
+    handleImageLinks(postElem);
     updateMathJax([postElem]);
     twemoji.parse(postElem);
     postElem.addEventListener('click', () => {expandFunc(postElem)});
