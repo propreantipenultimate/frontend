@@ -167,12 +167,17 @@ let renderPostCard = (config) => {
     postCard.innerHTML = `
         <div class='post-header'>
             <div class='post-info'>
-                <h3><a class='author-uname' href='../profile/?username=${author}'>a</a> &bull; <span class='post-timestamp'>${getTimeElapsedString(date)}</span> &bull; ${reactions} Reactions</h3>
+                <h3><a class='author-uname' href='../profile/?username=${author}'>a</a> &bull; <span class='post-timestamp'>${getTimeElapsedString(date)}</span></h3>
                 <h2>Post Title</h2>
             </div>
         </div>
         <p></p>
     `
+
+    if(reactions) {
+        postCard.querySelector('h3').innerHTML += ` &bull; ${reactions} Reactions`;
+    }
+
     postCard.getElementsByClassName('author-uname')[0].innerText = '@' + author;
     postCard.getElementsByTagName('h2')[0].innerText = title;
     postCard.getElementsByTagName('p')[0].innerText = text;
@@ -207,7 +212,7 @@ if (user) {
         .eq('branch', profile.branch);
         // Now load the feed specifically for that branch
         document.getElementById('posts').innerHTML = `
-        <p class="hero visible" style="margin-block-start: 0;">You've seen all the posts from your following @${sessionStorage.getItem('username')}. <br> Here are today's top posts.</p>`
+        <p class="hero visible" style="margin-block-start: 0;">You've seen all the posts from your following, @${sessionStorage.getItem('username')}. <br> Here are today's top posts.</p>`
 
         if(totallingError) {
             console.log(totallingError);
@@ -236,7 +241,7 @@ if (user) {
         prof = profile;
         console.log(prof);
         const ptr = PullToRefresh.init({
-            mainElement: '#posts',
+            mainElement: '#following-posts',
             onRefresh() {
                 // Guard: If profile hasn't loaded yet, don't try to refresh
                 if (prof && prof.branch) {
@@ -261,6 +266,7 @@ if (user) {
     }
 
     if (window.matchMedia('(max-width: 600px)').matches) {
+        loadFollowingFeed(profile, 5);
         loadTrendingFeed(profile.branch, 20).then(() => {
                 hideLoadingScreen().then(() => {showContent(); showTitle();
             });
@@ -276,13 +282,18 @@ if (user) {
 let refresher = (profile) => {
     console.log(profile);
     postCount = 0;
-    setTimeout(() => {
-        document.getElementById('posts').innerHTML = `
+    postCountFollowing = 0;
+    setTimeout(async () => {
+        document.getElementById('following-posts').innerHTML = `
         `;
-        loadTrendingFeed(profile.branch, 20).then(() => {
+        loadFollowingFeed(profile, 20).then(() => {
             document.getElementById('posts').innerHTML = `
-                <p class="hero visible" style="margin-block-start: 0;">You've seen all the posts from your following @${sessionStorage.getItem('username')}. <br> Here are today's top posts.</p>
             `;
+            loadTrendingFeed(profile.branch, 20).then(() => {
+                document.getElementById('posts').innerHTML = `
+                    <p class="hero visible" style="margin-block-start: 0;">You've seen all the posts from your following @${sessionStorage.getItem('username')}. <br> Here are today's top posts.</p>
+                `;
+            });
         });
     }, 50);
 };

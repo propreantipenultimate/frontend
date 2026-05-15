@@ -5,7 +5,8 @@ import { debounce } from '../../common-scripts/debounce.js';
 import { addLoadingScreen, showEverything } from '../../common-scripts/side-notices.js';
 
 let settingsJSON = {};
-let defaultSettingsJSON = {}
+let defaultSettingsJSON = {};
+let ShowingUnsavedChangesScreen = false;
 
 addLoadingScreen();
 
@@ -25,6 +26,12 @@ if(localStorage.getItem('settings')) {
 } else {
     showAlert('No Settings found!');
 }
+
+document.getElementById('avatar-url').addEventListener('input', (event) => {
+    event.target.value = event.target.value.replace(/[^a-f,A-F,0123456789]/g, '').toUpperCase();
+
+    document.getElementById('colour-val-preview').style.setProperty('--demo-bg', '#' + event.target.value);
+});
 
 window.getSettingsValuesJSON = () => {
     let settingsJSON = {
@@ -67,7 +74,7 @@ document.getElementById('settings-form').addEventListener('submit', (event) => {
 
 let fetchAllInfo = async () => {
     let {data: inviteCodeDataUnsingled, error: inviteCodeError} = await database.from('invitecodes').select(`
-        users ( invites_left, username, id, created_at, branch ),
+        users ( invites_left, username, id, created_at, branch, profile_colour ),
         code
     `).eq('id', localStorage.getItem('nNetwork_uid'));
 
@@ -75,19 +82,14 @@ let fetchAllInfo = async () => {
         showAlert('womp');
         console.log(inviteCodeError);
     } else {
-        console.log('AAAAAAAAAAAAAAAAAA');
         console.log(localStorage.getItem('nNetwork_uid'), inviteCodeDataUnsingled);
         let inviteCodeData = inviteCodeDataUnsingled[0];
         document.getElementById('invite-code').value = inviteCodeData.code;
         document.getElementById('invitesleft').value = inviteCodeData.users.invites_left;
         document.getElementById('uname-text').value = inviteCodeData.users.username;
         document.getElementById('account-id').value = inviteCodeData.users.id;
+        document.getElementById('avatar-url').value = inviteCodeData.users.profile_colour.toUpperCase();
         document.getElementById('joindate').value = getDateRenderString(new Date(inviteCodeData.users.created_at));
-    }
-
-    if(window.MathJax) {
-        document.getElementById('mathjax-no').removeAttribute('checked');
-        document.getElementById('mathjax-yes').setAttribute('checked', 'true');
     }
 
     document.getElementById('user-agent').value = navigator.userAgent;
@@ -102,4 +104,10 @@ let fetchAllInfo = async () => {
     });
 };
 
-fetchAllInfo().then(showEverything());
+fetchAllInfo().then(() => {
+    showEverything();
+    if(window.MathJax) {
+        document.getElementById('mathjax-no').removeAttribute('checked');
+        document.getElementById('mathjax-yes').setAttribute('checked', 'true');
+    }
+});

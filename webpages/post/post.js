@@ -3,7 +3,7 @@ import { showAlert } from '../../common-scripts/alert.js';
 import { getTimeElapsedString, getDateRenderString, aDay } from '../../common-scripts/date.js';
 import { updateMathJax } from '../../common-scripts/mathjax.js';
 import { handleMentions, handleImageLinks } from '../../common-scripts/links.js';
-import { addLoadingScreen, showContent, showEverything, showTitle } from '../../common-scripts/side-notices.js';
+import { addLoadingScreen, showEverything } from '../../common-scripts/side-notices.js';
 
 addLoadingScreen();
 
@@ -86,6 +86,7 @@ window.writeComment = async () => {
 
         if(error) {
             showAlert('Error posting comment: ' + error.message + '<br> (ERR_CODE_' + error.code + ')');
+            return;
         } else {
             generateComment({
                 text: commentSource.value.trim(),
@@ -108,6 +109,7 @@ window.submitReaction = async (userId, postId, emojiChar) => {
 
     if (error) {
         console.error("Upsert failed:", error.message);
+        return;
     }
 };
 
@@ -142,6 +144,8 @@ window.displayReactions = async () => {
     
     if(error) {
         showAlert('Error getting reactions: ' + error.message + '<br> (ERR_CODE_' + error.code + ')');
+
+        return;
     } else {
         document.getElementById('reactions-actual').innerHTML = '';
         Object.entries(reactions).forEach(([key, value]) => {
@@ -162,6 +166,8 @@ window.displayReactions = async () => {
 
     if(error) {
         showAlert('could not fetch post data: ' + error.message + '<br> (ERR_CODE_' + error.code + ')');
+
+        return;
     } else {
         writePost({
             text: data.content,
@@ -176,6 +182,8 @@ window.displayReactions = async () => {
 
         if(countError) {
             showAlert('Could not count comments');
+
+            return;
         } else {
             totalComments = count;
             if(count == 0) {
@@ -196,6 +204,8 @@ window.displayReactions = async () => {
 
     if(error) {
         showAlert('could not fetch post data: ' + error.message + '<br> (ERR_CODE_' + error.code + ')');
+
+        return;
     } else {
         document.getElementById('author-username').textContent = data.username;
         document.getElementById('logo-mobile-nav').textContent = `@${data.username}'s post`

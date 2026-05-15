@@ -1,4 +1,3 @@
-import { showAlert } from './alert.js';
 import { database } from './database.js';
 import { showNotifications } from './notifications.js';
 import gsap from 'https://cdn.jsdelivr.net/npm/gsap@3.10.4/index.js';
@@ -9,6 +8,69 @@ if(!!document.referrer && (document.referrer.includes('webpages'))) {
     window.referrerOrigin = '';
 };
 
+(function() {
+    // Helper: Parse hex to RGB array
+    const hexToRgb = (hex) => {
+        const bigint = parseInt(hex.replace('#', ''), 16);
+        return [ (bigint >> 16) & 255, (bigint >> 8) & 255, bigint & 255 ];
+    };
+
+    // Helper: Simplified sRGB mixing logic
+    const mixColors = (color1, color2, percentage) => {
+        const c1 = hexToRgb(color1);
+        const c2 = hexToRgb(color2);
+        const p = percentage / 100;
+
+        const r = Math.round(c1[0] + (c2[0] - c1[0]) * p);
+        const g = Math.round(c1[1] + (c2[1] - c1[1]) * p);
+        const b = Math.round(c1[2] + (c2[2] - c1[2]) * p);
+
+        return `rgb(${r}, ${g}, ${b})`;
+    };
+
+    window.applyPolyfill = () => {
+        // 1. Iterate through all stylesheets
+        for (let sheet of document.styleSheets) {
+            try {
+                for (let rule of sheet.cssRules) {
+                    if (!rule.style) continue;
+
+                    // 2. Look for color-mix in background or border
+                    const props = ['background', 'background-color', 'border', 'border-color'];
+                    props.forEach(prop => {
+                        const val = rule.style.getPropertyValue(prop);
+                        
+                        // Regex to capture: color-mix(in srgb, #color1, #color2 percentage%)
+                        const regex = /color-mix\(\s*in\s+srgb\s*,\s*(#[a-fA-F0-9]{3,6})\s*,\s*(#[a-fA-F0-9]{3,6})\s+(\d+)%\s*\)/;
+                        const match = val.match(regex);
+
+                        if (match) {
+                            const [fullMatch, col1, col2, percent] = match;
+                            const calculated = mixColors(col1, col2, percent);
+
+                            // 3. Apply to all elements matching this selector
+                            document.querySelectorAll(rule.selectorText).forEach(el => {
+                                el.style[prop] = val.replace(fullMatch, calculated);
+                                console.log('prrr');
+                            });
+                        }
+                    });
+                }
+            } catch (e) {
+                // Catch cross-origin stylesheet errors
+                console.warn("Could not read stylesheet: ", e);
+            }
+        }
+    };
+
+    // Run on load
+    if (document.readyState === 'complete') {
+        applyPolyfill();
+    } else {
+        window.addEventListener('load', applyPolyfill);
+    }
+})();
+
 export { gsap };
 
 window.gsap = gsap;
@@ -18,6 +80,8 @@ function removeElem(elem) {elem.remove()};
 let shownavbars = true;
 
 export let barbaTime = 120;
+
+window.barbaTime = barbaTime;
 
 window.barba = {
     go: (url) => {
@@ -52,6 +116,7 @@ let testNotices = async () => {
 
         if (error) {
             console.log('Error getting Exam Info: ' + error.message + '<br> (ERR_CODE_' + error.code + ')');
+            return;
         } else {
             if (data) {
                 sessionStorage.setItem('examinfo', data.examinfo.examinfo);
@@ -258,6 +323,7 @@ export function showContent() {
 export function hideLoadingScreen() {
     console.log('hiding');
     const loading = document.getElementById('loading-screen');
+    applyPolyfill();
     return gsap.to(loading, {
         opacity: 0,
         duration: barbaTime / 1000,

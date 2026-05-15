@@ -62,7 +62,7 @@
 }
 
 .settings-display input:disabled {
-    border-bottom-color: color-mix(in srgb, var(--text-colour) 20%, transparent 80%);
+    cursor: not-allowed;
 }
 
 @media (max-width: 600px) {
@@ -70,4 +70,20 @@
         width: calc(100% - 2em);
         margin-inline-start: 1em;
     }
+}
+
+#colour-val-preview {
+    --demo-bg: transparent;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: var(--nav-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: none;
+    border-radius: 0.25rem;
+    margin-inline-start: 0.5rem;
+    user-select: none;
+    background-color: color-mix(in srgb, var(--demo-bg) 20%, var(--body-colour) 80%);
+    transition: background-color 0.3s ease;
 }

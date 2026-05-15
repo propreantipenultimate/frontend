@@ -2,7 +2,6 @@ import { getTimeElapsedString, getDateRenderString } from './date.js';
 import { database } from './database.js';
 import { handleMentions } from './links.js';
 import { updateMathJax } from './mathjax.js';
-import { showAlert } from './alert.js';
 
 export let NotificationsBuilder = async () => {
     const allNotifications = [];

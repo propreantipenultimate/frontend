@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Fira+Mono:wght@400;500;700&family=Fira+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Google+Sans+Code:ital,wght,MONO@0,300..800,1;1,300..800,1&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Noto+Sans+Math&display=swap');
 
 @import url(navbar.css);
 @import url(buttons.css);
@@ -9,13 +9,26 @@
     src: url(Twemoji.Mozilla.ttf);
 }
 
+@font-face {
+    font-family: 'Bricolage Grotesque';
+    src: url(../Bricolage_Grotesque/BricolageGrotesque-VariableFont_opsz\,wdth\,wght.ttf);
+    font-weight: 100 900;
+}
+
+@font-face {
+    font-family: 'Bricolage Grotesque Condensed';
+    src: url(../Bricolage_Grotesque/BricolageGrotesque-VariableFont_opsz\,wdth\,wght.ttf);
+    font-weight: 100 900;
+    font-variation-settings: 'wdth' 76.5;
+}
+
 .post-card h1 {
     word-break: break-all;
     word-wrap: break-word;
 }
 
 :root {
-    --headings-font: 'Fira Sans', Verdana, Tahoma, sans-serif;
+    --headings-font: 'Bricolage Grotesque', Verdana, Tahoma, sans-serif;
     font-family: var(--font-stack);
     box-sizing: border-box;
     --text-colour: #343434;
@@ -24,8 +37,8 @@
     --body-colour-copy: #fff;
     color: var(--text-colour);
     --font-stack: 'Google Sans', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    --monospace-font-stack: 'Fira Mono' ,ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
-    --condensed-font-stack: 'Fira Sans Condensed', var(--font-stack);
+    --monospace-font-stack: 'Google Sans Code' ,ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+    --condensed-font-stack: 'Bricolage Grotesque Condensed', var(--font-stack);
 }
 
 * {
@@ -85,7 +98,8 @@ h1, h2, h3 {
 /* logo */
 
 .logo {
-    font-family: 'Fira Sans';
+    font-family: var(--headings-font);
+    font-variation-settings: 'wdth' 90;
     font-weight: 500;
 }
 
@@ -163,7 +177,7 @@ textarea, .textarea {
     background-color: transparent;
     padding: 0.5em;
     border-style: solid;
-    border-color: color-mix(in srgb, var(--text-colour) 10%, transparent 90%);
+    border-color: color-mix(in srgb, var(--text-colour) 10%, var(--body-colour) 90%);
     border-width: 1px;
     font-family: var(--monospace-font-stack);
     width: 100%;
@@ -200,19 +214,23 @@ textarea, .textarea {
 /* form elements */
 
 input:not([type=checkbox], .textarea), select {
+    --border-colour: dodgerblue;
     outline: none;
     font-size: 1.25em;
     display: block;
     margin: 0 auto;
     font-family: inherit;
     border: none;
-    transition: cubic-bezier(0.68, -0.55, 0.265, 1.55) all 0.25s;
+    transition: ease all 0.3s;
     color: var(--text-colour);
     font-family: var(--condensed-font-stack);
-    border-bottom: solid 0.1rem #aaa;
     width: 100%;
     background-color: transparent;
     margin-bottom: 1em;
+    background: linear-gradient(var(--border-colour) 0 0) left bottom/0% 1px no-repeat;
+    border: solid color-mix(in srgb, var(--text-colour) 10%, var(--body-colour) 90%) 1.5px;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
 }
 
 input::placeholder {
@@ -220,15 +238,15 @@ input::placeholder {
 }
 
 input:focus:not(.textarea) {
-    border-bottom-color: dodgerblue;
+    background-size: 100% 1.5px;
 }
 
 input.wrong:not(.textarea) {
-    border-bottom-color: red;
+    --border-colour: red;
 }
 
 input.correct:not(.textarea) {
-    border-bottom-color: springgreen;
+    --border-colour: springgreen;
 }
 
 input[type=radio] {
@@ -283,6 +301,7 @@ html {
 }
 
 a.link, .img-link::after {
+    --border-colour: var(--text-colour);
     color: var(--text-colour);
     cursor: pointer;
     font-family: var(--condensed-font-stack);
@@ -303,7 +322,7 @@ a.link, .img-link::after {
     font-family: var(--condensed-font-stack);
     text-transform: uppercase;
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 500;
     justify-content: center;
     text-align: center;
     line-height: 1.25;
@@ -318,6 +337,9 @@ a.link, .img-link::after {
     width: auto;
     flex-wrap: wrap;
     line-break: auto;
+    background: linear-gradient(var(--border-colour) 0 0) left bottom/0% 1px no-repeat;
+    background-clip: content-box;
+    text-decoration: none;
 }
 
 a.img-link {
@@ -366,8 +388,8 @@ img.post-img:last-child {
         opacity: 0.5;
     }
 
-    a.link:not(:hover), .img-link {
-        text-decoration: none;
+    a.link:hover {
+        background-size: 100% 1.5px;
     }
 }
 
@@ -473,4 +495,8 @@ emoji-picker {
     #side-notices {
         display: none;
     }
+}
+
+mjx-container {
+  font-family: "Noto Sans Math", "MJX-TEX", sans-serif !important;
 }
