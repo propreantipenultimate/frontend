@@ -5,6 +5,14 @@ body {
     color: var(--text-colour);
 }
 
+h1 {
+    font-family: var(--condensed-font-stack) !important;
+}
+
+* {
+    transition: none;
+}
+
 h1.large {
     font-size: 3em;
     text-align: center;
@@ -147,7 +155,7 @@ h1.larger {
         position: fixed;
         top: calc((100vh - 40vw) / 2);
         left: 5vw;
-        font-size: calc(7.5vw / 8);
+        font-size: calc(9.75vw / 8);
         border-radius: 50%;
     }
 
@@ -161,6 +169,8 @@ h1.larger {
         line-height: 0.3;
         font-size: 0.4em;
         margin: 0;
+        position: relative;
+        top: 0.3em;
         text-align: left;
     }
 }

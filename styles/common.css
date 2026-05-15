@@ -100,7 +100,8 @@ h1, h2, h3 {
 .logo {
     font-family: var(--headings-font);
     font-variation-settings: 'wdth' 90;
-    font-weight: 500;
+    font-weight: 700;
+    opacity: 0.99;
 }
 
 .logo.large::before {
@@ -108,7 +109,9 @@ h1, h2, h3 {
     display: block;
     line-height: 0.3;
     font-size: 0.5em;
-    margin: 0;
+    margin: 0rem;
+    position: relative;
+    top: 0.1em;
 }
 
 .logo.large {
