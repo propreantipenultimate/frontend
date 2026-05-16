@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // If logged in, they shouldn't be on Login, Signup, or Landing.
         // Redirect them to Profile.
-        if (isAuthPage || isLandingPage) {
+        if (isAuthPage) {
             window.location.href = '../home/';
         }
     } else {

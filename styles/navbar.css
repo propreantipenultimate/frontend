@@ -187,3 +187,14 @@ aside .logo {
         display: none;
     }
 }
+
+@media (max-width: 992px) and (hover: hover) {
+    #navbar:not(:hover) {
+        margin-inline-start: -5rem;
+    }
+
+    #navbar {
+        transition: margin-inline-start 0.3s ease;
+        width: 100%;
+    }
+}

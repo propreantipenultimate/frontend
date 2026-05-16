@@ -18,7 +18,7 @@
 @font-face {
     font-family: 'Bricolage Grotesque Condensed';
     src: url(../Bricolage_Grotesque/BricolageGrotesque-VariableFont_opsz\,wdth\,wght.ttf);
-    font-weight: 100 900;
+    font-weight: 100 300;
     font-variation-settings: 'wdth' 76.5;
 }
 
@@ -263,7 +263,7 @@ input[type=radio] {
 /* hero text */
 
 .hero {
-    font-family:var(--condensed-font-stack);
+    font-family:var(--headings-font);
     text-align: center;
 }
 
@@ -502,4 +502,16 @@ emoji-picker {
 
 mjx-container {
   font-family: "Noto Sans Math", "MJX-TEX", sans-serif !important;
+}
+
+@keyframes logo-pseudoelem-before-enter {
+    0% {
+        top: 1em;
+        opacity: 0;
+    }
+
+    100% {
+        top: 0.3em;
+        opacity: 1;
+    }
 }
