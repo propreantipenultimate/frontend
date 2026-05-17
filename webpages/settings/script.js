@@ -77,7 +77,7 @@ let fetchAllInfo = async () => {
         users ( invites_left, username, id, created_at, branch, profile_colour ),
         code
     `).eq('id', localStorage.getItem('nNetwork_uid'));
-
+    console.table(inviteCodeDataUnsingled[0]);
     if(inviteCodeError) {
         showAlert('womp');
         console.log(inviteCodeError);
