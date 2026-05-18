@@ -72,7 +72,7 @@ aside .logo {
     margin: 0;
     font-style: italic;
     opacity: 0.75;
-    font-family: var(--condensed-font-stack);
+    font-family: var(--headings-font);
     text-align: right;
 }
 
